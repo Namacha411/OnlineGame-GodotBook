@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://cryku58e5v0ks"]
+
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_8so16"]
+[ext_resource type="Texture2D" uid="uid://ugfe1wpkb40e" path="res://sprites/bg_grid.png" id="2_e1fhr"]
+
+[node name="main" type="Node"]
+script = ExtResource("1_8so16")
+
+[node name="bg" type="TextureRect" parent="."]
+offset_left = -1187.0
+offset_top = -653.0
+offset_right = 1167.0
+offset_bottom = 659.0
+texture = ExtResource("2_e1fhr")
+stretch_mode = 1
+
+[node name="bullets" type="Node2D" parent="."]
+
+[node name="players" type="Node2D" parent="."]
+
+[node name="targets" type="Node2D" parent="."]
