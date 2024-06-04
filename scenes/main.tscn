@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://cryku58e5v0ks"]
+[gd_scene load_steps=5 format=3 uid="uid://cryku58e5v0ks"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_8so16"]
 [ext_resource type="Texture2D" uid="uid://ugfe1wpkb40e" path="res://sprites/bg_grid.png" id="2_e1fhr"]
+[ext_resource type="Texture2D" uid="uid://cu36ifa85gx3w" path="res://sprites/expbar_empty.png" id="4_p6h5o"]
+[ext_resource type="Texture2D" uid="uid://cbywkmos02i4p" path="res://sprites/expbar_full.png" id="5_q2aum"]
 
 [node name="main" type="Node"]
 script = ExtResource("1_8so16")
@@ -19,3 +21,19 @@ stretch_mode = 1
 [node name="players" type="Node2D" parent="."]
 
 [node name="targets" type="Node2D" parent="."]
+
+[node name="exps" type="Node2D" parent="."]
+
+[node name="ui" type="CanvasLayer" parent="."]
+
+[node name="expbar" type="TextureProgressBar" parent="ui"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -79.0
+grow_horizontal = 2
+grow_vertical = 0
+nine_patch_stretch = true
+texture_under = ExtResource("4_p6h5o")
+texture_progress = ExtResource("5_q2aum")

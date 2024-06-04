@@ -1,5 +1,6 @@
 extends Node2D
 
+var expball_pre = preload("res://scenes/exp.tscn")
 var speed := 600.0
 var lifetime := 3.0
 
@@ -21,3 +22,8 @@ func _on_hitbox_area_entered(area):
 	if body is Target:
 		body.queue_free()
 		self.queue_free()
+		for i in range(randi_range(3, 5)):
+			var expball = expball_pre.instantiate()
+			expball.position = body.position
+			expball.lerp_position = body.position + Vector2(randf_range(-50, 50), randf_range(-50, 50))
+			$/root/main/exps.add_child.call_deferred(expball)

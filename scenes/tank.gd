@@ -9,6 +9,8 @@ const JUMP_VELOCITY = -400.0
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var bullet_pre = preload("res://scenes/bullet.tscn")
 var rotation_velocity := 0.0
+var tank_exp := 0
+var tank_exp_max := 10
 
 
 func _physics_process(delta):
@@ -34,3 +36,16 @@ func shoot():
 	bullet.rotation = $cannon.rotation
 	bullet.position = self.position
 	$/root/main/bullets.add_child(bullet)
+
+
+func _on_area_area_entered(area):
+	var body = area.get_parent()
+	if body is Exp:
+		body.queue_free()
+		exp_add(1)
+
+func exp_add(v):
+	var expbar = $/root/main/ui/expbar
+	tank_exp += v
+	expbar.value = tank_exp
+	expbar.max_value = tank_exp_max
