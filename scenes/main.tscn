@@ -1,18 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://cryku58e5v0ks"]
+[gd_scene load_steps=6 format=3 uid="uid://cryku58e5v0ks"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_8so16"]
 [ext_resource type="Texture2D" uid="uid://ugfe1wpkb40e" path="res://sprites/bg_grid.png" id="2_e1fhr"]
 [ext_resource type="Texture2D" uid="uid://cu36ifa85gx3w" path="res://sprites/expbar_empty.png" id="4_p6h5o"]
+[ext_resource type="PackedScene" uid="uid://v4mo3yqh6ruj" path="res://scenes/title.tscn" id="5_kxi2u"]
 [ext_resource type="Texture2D" uid="uid://cbywkmos02i4p" path="res://sprites/expbar_full.png" id="5_q2aum"]
 
 [node name="main" type="Node"]
 script = ExtResource("1_8so16")
 
 [node name="bg" type="TextureRect" parent="."]
-offset_left = -1187.0
-offset_top = -653.0
-offset_right = 1167.0
-offset_bottom = 659.0
+offset_left = -1179.0
+offset_top = -654.0
+offset_right = 1175.0
+offset_bottom = 658.0
 texture = ExtResource("2_e1fhr")
 stretch_mode = 1
 
@@ -37,3 +38,39 @@ grow_vertical = 0
 nine_patch_stretch = true
 texture_under = ExtResource("4_p6h5o")
 texture_progress = ExtResource("5_q2aum")
+
+[node name="exp" type="Label" parent="ui"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -21.0
+offset_top = -43.0
+offset_right = 21.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "0 / 10"
+
+[node name="level" type="Label" parent="ui"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -97.0
+offset_right = 20.0
+offset_bottom = -74.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "Lv 01"
+
+[node name="title" parent="." instance=ExtResource("5_kxi2u")]
+
+[connection signal="start_pressed" from="title" to="." method="_on_title_start_pressed"]

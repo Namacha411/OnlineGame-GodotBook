@@ -20,10 +20,5 @@ func _process(delta):
 func _on_hitbox_area_entered(area):
 	var body = area.get_parent()
 	if body is Target:
-		body.queue_free()
+		body.damaged.emit()
 		self.queue_free()
-		for i in range(randi_range(3, 5)):
-			var expball = expball_pre.instantiate()
-			expball.position = body.position
-			expball.lerp_position = body.position + Vector2(randf_range(-50, 50), randf_range(-50, 50))
-			$/root/main/exps.add_child.call_deferred(expball)
