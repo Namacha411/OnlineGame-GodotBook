@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 signal start_pressed
+signal room_pressed
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -14,4 +15,9 @@ func _process(delta):
 
 func _on_start_pressed():
 	start_pressed.emit($entername.text)
+	hide()
+
+
+func _on_room_pressed():
+	room_pressed.emit()
 	hide()

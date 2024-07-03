@@ -73,4 +73,13 @@ text = "Lv 01"
 
 [node name="title" parent="." instance=ExtResource("5_kxi2u")]
 
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://scenes/tank.tscn")
+spawn_path = NodePath("../players")
+
+[node name="BulletSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://scenes/bullet.tscn")
+spawn_path = NodePath("../bullets")
+
+[connection signal="room_pressed" from="title" to="." method="_on_title_room_pressed"]
 [connection signal="start_pressed" from="title" to="." method="_on_title_start_pressed"]

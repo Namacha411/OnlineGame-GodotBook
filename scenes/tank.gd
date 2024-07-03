@@ -1,6 +1,5 @@
 extends CharacterBody2D
 
-
 const ROT_SPEED = 1
 const MOVE_SPEED = 200
 const JUMP_VELOCITY = -400.0
@@ -12,7 +11,18 @@ var rotation_velocity := 0.0
 var tank_exp := 0
 var tank_exp_max := 10
 var tank_level := 1
+var player_id := 0
 
+func _enter_tree():
+	player_id = int(str(name))
+	set_multiplayer_authority(player_id)
+	
+func _ready():
+	if player_id == multiplayer.get_unique_id():
+		$name.text = $/root/main/title/entername.text
+	else:
+		$camera.enabled = false
+		set_physics_process(false)
 
 func _physics_process(delta):
 	var direction = Input.get_axis("ui_left", "ui_right")
@@ -33,22 +43,26 @@ func _physics_process(delta):
 		var bullet_rotation = $cannon.rotation
 		var bullet_speed = clamp(6 + (tank_level - 1) * 0.2, 0, 12) * 100
 		var bullet_scale = scale * 5
-		shoot(bullet_position, bullet_rotation, bullet_scale, bullet_speed)
+		shoot.rpc_id(1, bullet_position, bullet_rotation, bullet_scale, bullet_speed)
 	move_and_slide()
 
+@rpc("any_peer")
 func shoot(bullet_position, bullet_rotation, bullet_scale, bullet_speed):
 	var bullet = bullet_pre.instantiate()
-	bullet.position = bullet_position
+	bullet.init_position = bullet_position
 	bullet.rotation = bullet_rotation
 	bullet.scale = bullet_scale
 	bullet.speed = bullet_speed
+	bullet.player_id = player_id
+	bullet.name = str(randi())
 	$/root/main/bullets.add_child(bullet)
 
 func _on_area_area_entered(area):
 	var body = area.get_parent()
 	if body is Exp:
 		body.queue_free()
-		exp_add(1)
+		if player_id == multiplayer.get_unique_id():
+			exp_add(1)
 
 func exp_add(v):
 	tank_exp += v
